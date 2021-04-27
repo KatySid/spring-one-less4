@@ -17,7 +17,9 @@
             <tr>
                 <th>ID</th>
                 <th>Имя</th>
+                <th></th>
                 <th>Балл</th>
+                <th></th>
                 <th>Действия</th>
             </tr>
             </thead>
@@ -25,7 +27,13 @@
             <tr th:each="s : ${students}">
                 <td th:text="${s.id}"/>
                 <td th:text="${s.name}"/>
+                <td>
+                    <a  class="btn btn-light" th:href="@{'/students/inc/'+${s.id}}">-</a>
+                </td>
                 <td th:text="${s.score}"/>
+                <td>
+                    <a  class="btn btn-light" th:href="@{'/students/dec/'+${s.id}}">+</a>
+                </td>
                 <td>
                     <a class="btn btn-danger" th:href="@{'/students/delete/' + ${s.id}}">Удалить запись</a>
                 </td>
@@ -33,6 +41,13 @@
             </tbody>
         </table>
         <a th:href="@{/students/create}" class="btn btn-primary">Добавить нового студента</a>
+        <form method="GET" th:action="@{/students}">
+            <div class="mb-3">
+                <label for="idField" class="form-label">ID</label>
+                <input type="number" class="form-control" id="idField" name="id">
+            </div>
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </form>
     </div>
 </body>
 </html>
